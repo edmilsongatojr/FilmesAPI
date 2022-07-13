@@ -1,5 +1,6 @@
 ﻿using FilmesAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace FilmesAPI.Controllers
@@ -17,7 +18,7 @@ namespace FilmesAPI.Controllers
         {
 
             filmes.Add(filme);
-            System.Console.WriteLine(filme.Titulo);
+            //Console.WriteLine(filme.Titulo);
         }
     }
 }
