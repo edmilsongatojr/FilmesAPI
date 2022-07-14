@@ -24,13 +24,14 @@ namespace FilmesAPI.Controllers
         public IActionResult AdicionarFilme([FromBody] Filme filme)
         {
             _context.Filmes.Add(filme);
+            _context.SaveChanges();
             return CreatedAtAction(nameof(RecuperaFilmesPorId), new { id = filme.Id }, filme);
         }
 
         [HttpGet]
-        public IActionResult RecuperaFilmes()
+        public IEnumerable<Filme> RecuperaFilmes()
         {
-            return Ok(_context.Filmes);
+            return _context.Filmes;
         }
 
         [HttpGet("{id}")]
