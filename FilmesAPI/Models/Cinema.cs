@@ -9,5 +9,6 @@ namespace FilmesAPI.Models
         public int Id { get; set; }
         [Required(ErrorMessage ="O Campo de nome é Obrigatorio!")]
         public string Nome { get; set; }
+        public Endereco Endereco { get; set; }
     }
 }
