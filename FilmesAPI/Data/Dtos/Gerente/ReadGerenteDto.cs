@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace FilmesAPI.Data.Dtos.Gerente
 {
@@ -9,5 +10,7 @@ namespace FilmesAPI.Data.Dtos.Gerente
         public int Id { get; set; }
         [Required]
         public string Nome { get; set; }
+
+        public object Cinemas { get; set; }
     }
 }
