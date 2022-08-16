@@ -10,6 +10,7 @@ namespace FilmesAPI.Data.Dtos.Cinema
         public int Id { get; set; }
         [Required(ErrorMessage = "O Campo de nome é Obrigatorio!")]
         public string Nome { get; set; }
+        public int EnderecoId { get; set; }
         public DateTime HoraDaConsulta { get; set; }
     }
 }
