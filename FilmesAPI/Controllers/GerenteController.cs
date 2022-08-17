@@ -32,7 +32,7 @@ namespace FilmesAPI.Controllers
         }
 
         [HttpGet]
-        private IEnumerable<Gerente> RecuperarGerente()
+        public IEnumerable<Gerente> RecuperarGerente()
         {
             return _context.Gerentes;
         }

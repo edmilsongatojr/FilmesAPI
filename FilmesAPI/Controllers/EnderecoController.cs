@@ -22,9 +22,9 @@ namespace FilmesAPI.Controllers
             _mapper = mapper;
         }
         [HttpPost]
-        public IActionResult AdicionarEndereco([FromBody] CreateEnderecoDto enderecoDto)
+        public IActionResult AdicionarEndereco(CreateEnderecoDto dto)
         {
-            Endereco endereco = _mapper.Map<Endereco>(enderecoDto);
+            Endereco endereco = _mapper.Map<Endereco>(dto);
             _context.Enderecos.Add(endereco);
             _context.SaveChanges();
             return CreatedAtAction(nameof(RecuperarEnderecosPorId), new { Id = endereco.Id }, endereco);
