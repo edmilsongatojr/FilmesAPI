@@ -17,6 +17,7 @@ namespace FilmesAPI.Models
         public string Genero { get; set; }
         [Range(1,600,ErrorMessage ="A duração pode ter de 1 a 600 minutos!")]
         public int Duracao { get; set; }
+        public int ClassificacaoEtaria { get; set; }
         [JsonIgnore]
         public virtual List<Sessao> Sessoes { get; set; }
     }
