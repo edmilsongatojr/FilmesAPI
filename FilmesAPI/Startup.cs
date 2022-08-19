@@ -34,6 +34,7 @@ namespace FilmesAPI
             services.AddDbContext<AppDbContext>(opts => opts.UseLazyLoadingProxies().UseMySQL(Configuration.GetConnectionString("FilmeConnection")));
             services.AddScoped<FilmeService, FilmeService>();
             services.AddScoped<CinemaService, CinemaService>();
+            services.AddScoped<GerenteService, GerenteService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

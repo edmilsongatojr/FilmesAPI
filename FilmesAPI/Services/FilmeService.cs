@@ -3,7 +3,6 @@ using FilmesAPI.Data;
 using FilmesAPI.Data.Dtos.Filme;
 using FilmesAPI.Models;
 using FluentResults;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -28,7 +27,7 @@ namespace FilmesAPI.Services
             return _mapper.Map<ReadFilmeDto>(filme);
         }
 
-        internal List<ReadFilmeDto> RetornarFilmes(int? classificacaoEtaria)
+        public List<ReadFilmeDto> RetornarFilmes(int? classificacaoEtaria)
         {
             List<Filme> filmes;
             if (classificacaoEtaria == null)
