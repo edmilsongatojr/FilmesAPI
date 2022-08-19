@@ -9,12 +9,12 @@ using System.Linq;
 
 namespace FilmesAPI.Services
 {
-    public class FilmesServices
+    public class FilmeService
     {
         private AppDbContext _context;
         private IMapper _mapper;
 
-        public FilmesServices(AppDbContext context, IMapper mapper)
+        public FilmeService(AppDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

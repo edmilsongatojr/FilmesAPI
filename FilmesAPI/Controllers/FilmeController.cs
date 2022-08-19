@@ -16,8 +16,8 @@ namespace FilmesAPI.Controllers
     public class FilmeController : ControllerBase
     {
         
-        private readonly FilmesServices _filmeService;
-        public FilmeController(FilmesServices filmeService)
+        private readonly FilmeService _filmeService;
+        public FilmeController(FilmeService filmeService)
         {
           _filmeService = filmeService;
         }
