@@ -4,6 +4,7 @@ using FilmesAPI.Data.Dtos.Endereco;
 using FilmesAPI.Data.Dtos.Gerente;
 using FilmesAPI.Data.Dtos.Sessao;
 using FilmesAPI.Models;
+using FilmesAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,38 +16,30 @@ namespace FilmesAPI.Controllers
     [Route("[controller]")]
     public class SessaoController : ControllerBase
     {
-        private AppDbContext _context;
-        private IMapper _mapper;
-        public SessaoController(AppDbContext context, IMapper mapper)
+        private readonly SessaoService _sessaoService;
+        public SessaoController(SessaoService sessaoService)
         {
-            _context = context;
-            _mapper = mapper;
+            _sessaoService = sessaoService;
         }
 
         [HttpPost]
         public IActionResult AdicionarSessao(CreateSessaoDto dto)
         {
-            Sessao sessao = _mapper.Map<Sessao>(dto);
-            _context.Sessoes.Add(sessao);
-            _context.SaveChanges();
-            return CreatedAtAction(nameof(RecuperarSessaoPorId), new { Id = sessao.Id_Sessao }, sessao);
+            ReadSessaoDto readDto = _sessaoService.AdicionarSessao(dto);
+            return CreatedAtAction(nameof(RecuperarSessaoPorId), new { Id = readDto.Id_Sessao }, readDto);
         }
 
-        [HttpGet]
-        public IEnumerable<Sessao> RetornarSessao()
-        {
-            return _context.Sessoes;
-        }
+        //[HttpGet]
+        //public IEnumerable<Sessao> RetornarSessao()
+        //{
+        //    return _context.Sessoes;
+        //}
 
         [HttpGet("{id}")]
-        public IActionResult RecuperarSessaoPorId(int id)
+        public IActionResult RecuperarSessaoPorId(int? id)
         {
-            Sessao sessao = _context.Sessoes.FirstOrDefault(sessao => sessao.Id_Sessao == id);
-            if (sessao != null)
-            {
-               ReadSessaoDto sessaoDto = _mapper.Map<ReadSessaoDto>(sessao);
-                return Ok(sessaoDto);
-            }
+            ReadSessaoDto readDto = _sessaoService.RecuperSessaoPorId(id);
+            
            return NotFound();
         }
     }
