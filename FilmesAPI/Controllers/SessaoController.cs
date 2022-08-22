@@ -38,8 +38,8 @@ namespace FilmesAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult RecuperarSessaoPorId(int? id)
         {
-            ReadSessaoDto readDto = _sessaoService.RecuperSessaoPorId(id);
-            
+           List<ReadSessaoDto> readDto = _sessaoService.RecuperSessaoPorId(id);
+           if (readDto != null) return Ok(readDto);
            return NotFound();
         }
     }
