@@ -13,7 +13,6 @@ namespace FilmesAPI.Profiles
                 .ForMember(dto => dto.HorarioInicioSessao, opts => opts
                 .MapFrom(dto =>
                 dto.HorarioFimSessao.AddMinutes(dto.Filme.Duracao * (-1))));
-            //CreateMap<UpdateCinemaDto, Sessao>();
         }
     }
 }

@@ -18,7 +18,6 @@ namespace FilmesAPI.Services
             _context = context;
             _mapper = mapper;
         }
-
         public ReadSessaoDto AdicionarSessao(CreateSessaoDto dto)
         {
             Sessao sessao = _mapper.Map<Sessao>(dto);
@@ -26,30 +25,13 @@ namespace FilmesAPI.Services
             _context.SaveChanges();
             return _mapper.Map<ReadSessaoDto>(sessao); 
         }
-
-        public List<ReadSessaoDto> RecuperSessaoPorId(int? id)
+        public ReadSessaoDto RecuperSessaoPorId(int id)
         {
-            //Sessao sessao = _context.Sessoes.FirstOrDefault(sessao => sessao.Id_Sessao == id);
-            //if (sessao != null)
-            //{
-            //    ReadSessaoDto sessaoDto = _mapper.Map<ReadSessaoDto>(sessao);
-            //    return Ok(sessaoDto);
-            //}
-
-            List<Sessao> sessoes;
-            if (id == null)
+            Sessao sessao = _context.Sessoes.FirstOrDefault(sessao => sessao.Id_Sessao == id);
+            if (sessao != null)
             {
-                sessoes = _context.Sessoes.ToList();
-            }
-            else
-            {
-                sessoes = _context.Sessoes.Where(sessao => sessao.Id_Sessao <= id)
-               .ToList();
-            }
-            if (sessoes != null)
-            {
-                List<ReadSessaoDto> readDto = _mapper.Map<List<ReadSessaoDto>>(sessoes);
-                return readDto;
+                ReadSessaoDto sessaoDto = _mapper.Map<ReadSessaoDto>(sessao);
+                return sessaoDto;
             }
             return null;
         }
