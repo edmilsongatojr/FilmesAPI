@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using FluentResults;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -33,11 +31,9 @@ namespace UsuarioApi.Services
             IdentityUser<int> usuarioIdentity = _mapper.Map<IdentityUser<int>>(usuario);
             Task<IdentityResult> resultIdentity = _userManager
                                                         .CreateAsync(usuarioIdentity, createDto.Password);
+            _userManager.AddToRoleAsync(usuarioIdentity, "regular");
             if (resultIdentity.Result.Succeeded)
             {
-                var createRoleResult = _roleManager.CreateAsync(new IdentityRole<int>("adm")).Result;
-                var usuarioRoleResult = _userManager.AddToRoleAsync(usuarioIdentity, "adm").Result;
-
                 var code = _userManager.GenerateEmailConfirmationTokenAsync(usuarioIdentity).Result;
                 var encodedCode = HttpUtility.UrlEncode(code);
                 _emailService.EnviarEmail(new[] { usuarioIdentity.Email }, "Link de Ativação", usuarioIdentity.Id, encodedCode);
