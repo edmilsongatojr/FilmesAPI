@@ -31,7 +31,8 @@ namespace UsuarioApi.Services
             {
                 var identityUser = _signInManager.UserManager.Users
                     .FirstOrDefault(usuario => usuario.NormalizedUserName == request.UserName.ToUpper());
-                Token token = _tokenService.CreateToken(identityUser);
+                Token token = _tokenService
+                    .CreateToken(identityUser, _signInManager.UserManager.GetRolesAsync(identityUser).Result.FirstOrDefault());
                 return Result.Ok().WithSuccess(token.Value);
                 //Acima estamos passando o valor do token nos sucessos do okay para enviar
                 //esse token para o LoginController mostrar ao usuario
