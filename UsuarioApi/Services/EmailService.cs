@@ -9,7 +9,7 @@ namespace UsuarioApi.Services
     public class EmailService
     {
         private IConfiguration _configuration;
-
+        private string codeMensagem;
         public EmailService(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -18,6 +18,7 @@ namespace UsuarioApi.Services
         public void EnviarEmail(string[] destinatario, string assunto, int usuarioId, string code)
         {
             Mensagem mensagem = new Mensagem(destinatario, assunto, usuarioId, code);
+            codeMensagem = mensagem.Conteudo;
             var mensagemDeEmail = CriaCorpoEmail(mensagem);
             Enviar(mensagemDeEmail);
         }
@@ -39,9 +40,9 @@ namespace UsuarioApi.Services
                 }
                 catch (Exception ex)
                 {
-
                     Console.WriteLine("ERRO Enviar Email: " + ex.Message);
-                    throw;
+                    //Saida da mensagem pois o SMTP esta dando retorno 5.4.5 Daily user sending quota exceeded. e não envia o email.
+                    Console.WriteLine("\nConteudo Mensagem: \n" + codeMensagem);
                 }
                 finally
                 {
