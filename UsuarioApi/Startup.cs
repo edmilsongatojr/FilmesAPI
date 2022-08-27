@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using UsuarioApi.Data;
+using UsuarioApi.Models;
 using UsuarioApi.Services;
 
 namespace UsuarioApi
@@ -25,7 +26,7 @@ namespace UsuarioApi
         {
             services.AddDbContext<UserDbContext>(options =>
             options.UseMySQL(Configuration.GetConnectionString("UsuarioConnection")));
-            services.AddIdentity<IdentityUser<int>, IdentityRole<int>>(opt => opt.SignIn.RequireConfirmedEmail = true)
+            services.AddIdentity<CustomIdentityUser, IdentityRole<int>>(opt => opt.SignIn.RequireConfirmedEmail = true)
                 .AddEntityFrameworkStores<UserDbContext>()
                 .AddDefaultTokenProviders();
             services.AddScoped<CadastroService, CadastroService>();

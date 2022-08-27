@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
+using UsuarioApi.Models;
 
 namespace UsuarioApi.Data
 {
-    public class UserDbContext : IdentityDbContext<IdentityUser<int>, IdentityRole<int>, int>
+    public class UserDbContext : IdentityDbContext<CustomIdentityUser, IdentityRole<int>, int>
     {
         private IConfiguration _configuration;
         public UserDbContext(DbContextOptions<UserDbContext> opt, IConfiguration configuration) : base(opt)
@@ -18,7 +19,7 @@ namespace UsuarioApi.Data
         {
             base.OnModelCreating(builder);
             //CRIANDO A ROLE PADRÃO
-            IdentityUser<int> admin = new IdentityUser<int>
+            CustomIdentityUser admin = new CustomIdentityUser
             {
                 UserName = "admin",
                 NormalizedUserName = "ADMIN",
@@ -30,10 +31,10 @@ namespace UsuarioApi.Data
 
             };
             //GERANDO SENHA COMO HASH
-            PasswordHasher<IdentityUser<int>> hasher = new();
+            PasswordHasher<CustomIdentityUser> hasher = new();
             admin.PasswordHash = hasher.HashPassword(admin, _configuration.GetValue<string>("adminInfo:password"));
 
-            builder.Entity<IdentityUser<int>>().HasData(admin);
+            builder.Entity<CustomIdentityUser>().HasData(admin);
             builder.Entity<IdentityRole<int>>().HasData(
                 new IdentityRole<int>
                 {
