@@ -1,5 +1,6 @@
 # FilmesAPI
 Solução com dois Projetos. 
+
 O Primeiro FilmesApi com uma Api que fornece uma coleção de filmes e suas informações.
 O Segundo UsuariosApi que se responsabiliza em controlar os acessos realizados na Api de Filmes, permitindo a confirmação de email para liberação dos cadastros e utilzação de token e user-secrets para mantes a seguração dos dados.
 
